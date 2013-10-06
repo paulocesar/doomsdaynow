@@ -15,4 +15,19 @@ describe("RestClient",function () {
     response.should.be.equal(rest_client.formatResponse(response));
   });
 
+  it("should build host and path from url",function () {
+    var url = "http://www.reddit.com/search"
+      , host = "www.reddit.com"
+      , path = "/search";
+
+    rest_client.url(url);
+  });
+
+  it("should do a rest request", function (done) {
+    rest_client.request({q:"sample"},function (err,result) {
+      if(err) throw err;
+      done();
+    })
+  });
+
 });

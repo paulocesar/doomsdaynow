@@ -1,5 +1,6 @@
 var http = require('http')
-  , utils = require('./utils');
+  , utils = require('./utils')
+  , _ = require('underscore');
 
 var RestClient = module.exports = {};
 
@@ -15,6 +16,17 @@ RestClient.formatResponse = function (response) {
   return response;
 }
 
+RestClient.url = function (url) {
+  var self = this
+    , link = url.replace(/http:\/\//,"").split("/");
+
+  self.host = link[0];
+  self.path = "";
+  _.each(link,function (value,key) {
+    if(key !== 0) self.path += "/" + value;
+  });
+}
+
 RestClient.request = function (params,cb) {
   var options = {}
     , self = this
@@ -26,7 +38,6 @@ RestClient.request = function (params,cb) {
     host: self.host,
     path: self.path + '?' + GETParams
   };
-
 
   function response(res) {
     var result = '';
