@@ -6,6 +6,5 @@ var rest_client = require("../rest_client")
 
 YahooHistory = module.exports = _.extend(rest_client);
 
-YahooHistory.host = "ichart.finance.yahoo.com";
-YahooHistory.path = "/table.csv";
+YahooHistory.url("ichart.finance.yahoo.com/table.csv");
 

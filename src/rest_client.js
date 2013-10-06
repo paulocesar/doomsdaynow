@@ -4,9 +4,9 @@ var http = require('http')
 
 var RestClient = module.exports = {};
 
-RestClient.host = "";
+RestClient._host = "";
 
-RestClient.path = "";
+RestClient._path = "";
 
 RestClient.buildParams = function (params) {
   return utils.objectToGETParams(params);
@@ -20,10 +20,10 @@ RestClient.url = function (url) {
   var self = this
     , link = url.replace(/http:\/\//,"").split("/");
 
-  self.host = link[0];
-  self.path = "";
+  self._host = link[0];
+  self._path = "";
   _.each(link,function (value,key) {
-    if(key !== 0) self.path += "/" + value;
+    if(key !== 0) self._path += "/" + value;
   });
 }
 
@@ -35,8 +35,8 @@ RestClient.request = function (params,cb) {
 
 
   options = {
-    host: self.host,
-    path: self.path + '?' + GETParams
+    host: self._host,
+    path: self._path + '?' + GETParams
   };
 
   function response(res) {

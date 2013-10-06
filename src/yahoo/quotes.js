@@ -5,8 +5,7 @@ var rest_client = require("../rest_client")
 
 YahooQuotes = module.exports = _.extend(rest_client);
 
-YahooQuotes.host = "download.finance.yahoo.com";
-YahooQuotes.path = "/d/quotes.csv";
+YahooQuotes.url("download.finance.yahoo.com/d/quotes.csv");
  
 YahooQuotes.formatResponse = function (response) {
   return response.replace(/,/g,"-");

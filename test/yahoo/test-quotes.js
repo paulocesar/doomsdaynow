@@ -7,7 +7,7 @@ describe("YahooQuotes", function () {
     var result = yahoo_quotes.formatResponse("a,b,v,c,c")
       , expected = "a-b-v-c-c";
 
-      result.should.be.equal(expected);
+    result.should.be.equal(expected);
   });
 
 });
