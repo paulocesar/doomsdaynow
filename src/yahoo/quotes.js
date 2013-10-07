@@ -27,7 +27,9 @@ YahooQuotes.TAG = {
 }
  
 YahooQuotes.formatResponse = function (response) {
-  return response.replace(/,/g,"-");
+  return response
+    .split(/\n/g)
+    .map(function(item){return item.split(',');});
 }
 
 YahooQuotes.parseTag = function (options) {

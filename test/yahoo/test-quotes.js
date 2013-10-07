@@ -4,13 +4,6 @@ var yahoo_history = require("../../src/yahoo/history")
 
 describe("YahooQuotes", function () {
 
-  it("should format correctly", function () {
-    var result = yahoo_quotes.formatResponse("a,b,v,c,c")
-      , expected = "a-b-v-c-c";
-    console.log(yahoo_history._host);
-    result.should.be.equal(expected);
-  });
-
   it("should convert requests to html tag",function () {
     var result = yahoo_quotes.parseTag(["ask","askSize","bid"])
       , expected = "aa5b";
@@ -28,6 +21,12 @@ describe("YahooQuotes", function () {
       , expected = "s=MSFT+XOM&f=aa5";
 
     result.should.be.equal(expected);
+  });
+
+  it("should format response correctly", function () {
+    var result = yahoo_quotes.formatResponse("a,b,v,c,c\na,c,v,rt,a")
+      , expected = [['a','b','v','c','c'],['a','c','v','rt','a']];
+    result.toString().should.be.equal(expected.toString());
   });
 
 });
