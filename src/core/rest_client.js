@@ -12,7 +12,7 @@ RestClient.buildParams = function (params) {
   return utils.objectToGETParams(params);
 }
 
-RestClient.formatResponse = function (response) {
+RestClient.formatResponse = function (params,response) {
   return response;
 }
 
@@ -42,7 +42,7 @@ RestClient.request = function (params,cb) {
   function response(res) {
     var result = '';
     res.on('data',function (chunk) { result += chunk; });
-    res.on('end',function () { cb(null,self.formatResponse(result)); });
+    res.on('end',function () { cb(null,self.formatResponse(params,result)); });
   }
 
   http.request(options,response).end();

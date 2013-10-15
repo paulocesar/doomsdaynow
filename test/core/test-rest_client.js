@@ -1,4 +1,4 @@
-var rest_client = require("../src/rest_client")
+var rest_client = require("../../src/core/rest_client")
   , should = require("should");
 
 describe("RestClient",function () {
@@ -12,7 +12,7 @@ describe("RestClient",function () {
 
   it("should return identical response", function () {
     var response = "123123AIjdsi45";
-    response.should.be.equal(rest_client.formatResponse(response));
+    response.should.be.equal(rest_client.formatResponse("",response));
   });
 
   it("should build host and path from url",function () {

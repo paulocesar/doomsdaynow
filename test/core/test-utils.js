@@ -1,4 +1,4 @@
-var utils = require('../src/utils')
+var utils = require('../../src/core/utils')
   , should = require ('should');
 
 describe("utils", function () {

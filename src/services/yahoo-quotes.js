@@ -1,6 +1,6 @@
-var rest_client = require("../rest_client")
+var rest_client = require("../core/rest_client")
   , _ = require("underscore")
-  , utils = require("../utils");
+  , utils = require("../core/utils");
 
 //http://www.gummy-stuff.org/Yahoo-data.htm
 
@@ -23,10 +23,29 @@ YahooQuotes.TAG = {
   changeRealTime: "c6",
   afterHoursChangeRealTime: "c8",
   dividendShare: "d",
-  lastTradeDate: "d1"
+  lastTradeDate: "d1",
+  tradeDate: "d2",
+  earningsShare: "e",
+  errorIndication: "e1",
+  epsEstimateCurrentYear: "e7",
+  epsEstimateNextYear: "e8",
+  epsEstimateNextQuarter: "e9",
+  floatShares: "f6",
+  daysLow: "g",
+  daysHigh: "h",
+  weekLow52: "j",
+  weekHigh52: "k",
+  holdingsGainPercent: "g1",
+  annualizedGain: "g3",
+  holdingsGain: "g4",
+  holdingsGainPercentRealTime: "g5",
+  holdingsGainRealTime: "g6",
+  moreInfo: "i",
+  orderBookRealTime: "i5",
+  
 }
  
-YahooQuotes.formatResponse = function (response) {
+YahooQuotes.formatResponse = function (params,response) {
   var result = response
     .split(/\n/g)
     .map(function(item){if(item !== '') return item.split(',');})
@@ -35,7 +54,7 @@ YahooQuotes.formatResponse = function (response) {
   while(size--) {
     if(!result[size]) result.splice(size,1);
   }
-
+  
   return result;
 }
 
@@ -57,5 +76,6 @@ YahooQuotes.buildParams = function (params) {
   var stocks = params.stock || []
     , tags = params.tag || []
     , self = this;
+  
   return utils.objectToGETParams({s: self.parseSymbols(stocks), f: self.parseTag(tags)});
 }

@@ -1,4 +1,4 @@
-var yahoo_history = require("../../src/yahoo/history")
+var yahoo_history = require("../../src/services/yahoo-history")
   , should = require("should");
 
 describe("YahooHistory", function () {
